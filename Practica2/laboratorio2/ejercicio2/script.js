@@ -30,7 +30,7 @@ function jugar() {
     }
   }
 
-  // Si llegaste a 7 intentos y no acertaste
+  // Si llegaste a 7 intentos y no acertaste perdistes
   if (!acertado) {
     alert(`❌ Has perdido. El número era ${numeroSecreto}.`);
   }

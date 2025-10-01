@@ -7,14 +7,19 @@
 </head>
 
 <body>
-    <h1>Adivina el Número</h1>
-    <p>Estoy pensando en un número entre 1 y 100. Tienes 7 intentos para adivinar.</p>
-    <input type="number" id="suposicion" placeholder="Introduce tu suposición">
-    <button id="botonAdivinar">Adivinar</button>
-    <p id="resultado"></p>
-    <button id="botonReiniciar" style="display: none;">Jugar de Nuevo</button>
+    <h1>🎲 Juego de Adivinanza</h1>
+    <p>He pensado un número entre 1 y 100. ¡Tienes 7 intentos para adivinarlo!</p>
 
-    <script src="adivinanza.js"></script>
+    <label for="guess">Tu número: </label>
+    <input type="number" id="guess" min="1" max="100">
+    <button id="btn-probar">Probar</button>
+    <button id="btn-reiniciar" style="display:none;">Reiniciar</button>
+
+    <p id="mensaje"></p>
+    <p id="intentos"></p>
+    <p id="rango"></p>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

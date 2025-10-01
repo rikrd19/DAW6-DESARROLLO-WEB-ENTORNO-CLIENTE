@@ -1,61 +1,87 @@
-let numeroSecreto;
-let intentosRestantes;
+// Generar número secreto entre 1 y 100
+let numeroSecreto = Math.floor(Math.random() * 100) + 1;
 
-// Obtener los elementos HTML
-const inputSuposicion = document.getElementById("suposicion");
-const botonAdivinar = document.getElementById("botonAdivinar");
-const parrafoResultado = document.getElementById("resultado");
-const botonReiniciar = document.getElementById("botonReiniciar");
+// Variables de control
+let intentos = 0;
+const maxIntentos = 7;
+let minRango = 1;
+let maxRango = 100;
 
-// Función para iniciar el juego
-function iniciarJuego() {
-  numeroSecreto = Math.floor(Math.random() * 100) + 1;
-  intentosRestantes = 7;
-  parrafoResultado.textContent = `Tienes ${intentosRestantes} intentos.`;
-  inputSuposicion.value = "";
-  inputSuposicion.disabled = false;
-  botonAdivinar.disabled = false;
-  botonReiniciar.style.display = "none";
-}
+// Elementos DOM
+const inputGuess = document.getElementById("guess");
+const mensaje = document.getElementById("mensaje");
+const intentosElem = document.getElementById("intentos");
+const rangoElem = document.getElementById("rango");
+const btnProbar = document.getElementById("btn-probar");
+const btnReiniciar = document.getElementById("btn-reiniciar");
 
-// Función que se ejecuta cuando el usuario hace clic en "Adivinar"
-function verificarAdivinanza() {
-  const suposicion = Number(inputSuposicion.value);
+btnProbar.addEventListener("click", adivinar);
+btnReiniciar.addEventListener("click", reiniciarJuego);
 
-  // Validación básica para asegurar que la entrada es un número válido
-  if (isNaN(suposicion) || suposicion < 1 || suposicion > 100) {
-    parrafoResultado.textContent =
-      "Por favor, introduce un número válido entre 1 y 100.";
+function adivinar() {
+  let numero = parseInt(inputGuess.value);
+
+  // Validar entrada
+  if (isNaN(numero) || numero < 1 || numero > 100) {
+    mensaje.textContent = "⚠️ Introduce un número válido entre 1 y 100.";
     return;
   }
 
-  intentosRestantes--;
+  intentos++;
+  let intentosRestantes = maxIntentos - intentos;
 
-  if (suposicion === numeroSecreto) {
-    parrafoResultado.textContent = `🎉 ¡Correcto! Adivinaste el número en ${
-      7 - intentosRestantes
-    } intento(s).`;
-    finalizarJuego();
-  } else if (intentosRestantes === 0) {
-    parrafoResultado.textContent = `❌ Has perdido. El número era ${numeroSecreto}.`;
-    finalizarJuego();
-  } else if (suposicion < numeroSecreto) {
-    parrafoResultado.textContent = `El número secreto es MAYOR. Te quedan ${intentosRestantes} intento(s).`;
-  } else {
-    parrafoResultado.textContent = `El número secreto es MENOR. Te quedan ${intentosRestantes} intento(s).`;
+  // Caso acierto
+  if (numero === numeroSecreto) {
+    mensaje.textContent = `🎉 ¡Acertaste! El número era ${numeroSecreto}. Lo lograste en ${intentos} intentos.`;
+    finDelJuego();
+    return;
   }
+
+  // Caso perder
+  if (intentos >= maxIntentos) {
+    mensaje.textContent = `❌ Has perdido. El número era ${numeroSecreto}.`;
+    finDelJuego();
+    return;
+  }
+
+  // Ajustar rango según el intento
+  if (numero < numeroSecreto) {
+    minRango = Math.max(minRango, numero + 1);
+    mensaje.textContent = "El número secreto es MAYOR.";
+  } else {
+    maxRango = Math.min(maxRango, numero - 1);
+    mensaje.textContent = "El número secreto es MENOR.";
+  }
+
+  // Mostrar progreso
+  intentosElem.textContent = `Te quedan ${intentosRestantes} intentos.`;
+  rangoElem.textContent = `👉 Pista: el número está entre ${minRango} y ${maxRango}.`;
+
+  // Limpiar input para siguiente intento
+  inputGuess.value = "";
 }
 
-// Función para terminar el juego y mostrar el botón de reiniciar
-function finalizarJuego() {
-  inputSuposicion.disabled = true;
-  botonAdivinar.disabled = true;
-  botonReiniciar.style.display = "block";
+// Función para bloquear y mostrar reinicio
+function finDelJuego() {
+  btnProbar.disabled = true;
+  btnReiniciar.style.display = "inline";
+  intentosElem.textContent = "";
+  rangoElem.textContent = "";
 }
 
-// Escuchadores de eventos para los botones
-botonAdivinar.addEventListener("click", verificarAdivinanza);
-botonReiniciar.addEventListener("click", iniciarJuego);
+// Función reiniciar el juego
+function reiniciarJuego() {
+  numeroSecreto = Math.floor(Math.random() * 100) + 1;
+  intentos = 0;
+  minRango = 1;
+  maxRango = 100;
 
-// Iniciar el juego cuando la página se carga
-document.addEventListener("DOMContentLoaded", iniciarJuego);
+  mensaje.textContent =
+    "¡Nuevo juego iniciado! Adivina el número entre 1 y 100.";
+  intentosElem.textContent = "";
+  rangoElem.textContent = "";
+
+  btnProbar.disabled = false;
+  btnReiniciar.style.display = "none";
+  inputGuess.value = "";
+}

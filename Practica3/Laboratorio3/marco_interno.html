@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco Interno</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .content {
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #495057;
+            margin-top: 0;
+        }
+
+        p {
+            color: #202122;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h2 id="iframeTitle">Este es el título original del iframe</h2>
+        <p>Contenido dentro del iframe.</p>
+        <p>Este contenido puede ser modificado desde la página principal usando JavaScript.</p>
+
+        <div class="highlight">
+            <strong>Nota:</strong> Este iframe demuestra la manipulación de contenido entre marcos usando el BOM.
+        </div>
+
+        <p id="dynamicContent">Contenido dinámico que puede cambiar.</p>
+    </div>
+
+    <script>
+        console.log('Iframe cargado y listo para manipulación');
+    </script>
+</body>
+
+</html>

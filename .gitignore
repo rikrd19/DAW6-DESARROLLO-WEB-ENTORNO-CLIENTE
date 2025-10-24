@@ -1,0 +1,17 @@
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules (if you use them in the future)
+node_modules/
+
+# Logs
+*.log
+

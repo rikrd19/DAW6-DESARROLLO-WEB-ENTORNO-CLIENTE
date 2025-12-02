@@ -92,28 +92,48 @@
 
       // Funcion para mostrar valores
       boton.addEventListener("click", function () {
+        // Ejercicio 2: Creación de formulario
+        console.log("========================================");
+        console.log("Ejercicio 2: Creación de formulario");
+        console.log("========================================");
+
         // Obtener valores
         const nombre = inputNombre.value;
         const fecha = inputFecha.value;
         const paisValor = selectPais.value;
         const paisTexto = selectPais.options[selectPais.selectedIndex].text;
 
-        // Mostrar en la pagina
-        resultados.innerHTML = `
-          <h3>Valores del fornulario:</h3>
-          <p><strong>Nombre:</strong> ${nombre} </p>
-          <p><strong>Fecha de nacimiento:</strong> ${fecha}</p>
-          <p><strong>Pais (valor):</strong> ${paisValor}</p>
-          <p><strong>Pais (texto):</strong> ${paisTexto}</p>
-          `;
-        // mostrar propiedades clave en consola
+        // Imprimir por pantalla: Lo que vamos a imprimir
+        resultados.innerHTML += "<p><strong>Lo que vamos a imprimir:</strong></p>";
+        resultados.innerHTML += "<p>1. Valores del formulario (Nombre, Fecha, País)</p>";
+        resultados.innerHTML += "<p>2. Propiedades clave de los elementos del formulario</p>";
+
+        // Imprimir por pantalla: Resultado - Valores del formulario
+        resultados.innerHTML += "<p><strong>Resultado:</strong></p>";
+        resultados.innerHTML += "<h4>Valores del formulario:</h4>";
+        resultados.innerHTML += `<p><strong>Nombre:</strong> ${nombre}</p>`;
+        resultados.innerHTML += `<p><strong>Fecha de nacimiento:</strong> ${fecha}</p>`;
+        resultados.innerHTML += `<p><strong>País (valor):</strong> ${paisValor}</p>`;
+        resultados.innerHTML += `<p><strong>País (texto):</strong> ${paisTexto}</p>`;
+
+        // Imprimir propiedades clave
+        resultados.innerHTML += "<h4>Propiedades clave de los elementos:</h4>";
+        resultados.innerHTML += `<p><strong>inputNombre.type:</strong> ${inputNombre.type}</p>`;
+        resultados.innerHTML += `<p><strong>inputNombre.value:</strong> ${inputNombre.value}</p>`;
+        resultados.innerHTML += `<p><strong>inputFecha.type:</strong> ${inputFecha.type}</p>`;
+        resultados.innerHTML += `<p><strong>inputFecha.value:</strong> ${inputFecha.value}</p>`;
+        resultados.innerHTML += `<p><strong>selectPais.options.length:</strong> ${selectPais.options.length}</p>`;
+        resultados.innerHTML += `<p><strong>selectPais.selectedIndex:</strong> ${selectPais.selectedIndex}</p>`;
+        resultados.innerHTML += `<p><strong>selectPais.value:</strong> ${selectPais.value}</p>`;
+
+        // Mostrar propiedades clave en consola también
         console.log("=== PROPIEDADES CLAVE ===");
         console.log("inputNombre.type:", inputNombre.type);
         console.log("inputNombre.value:", inputNombre.value);
         console.log("inputFecha.type:", inputFecha.type);
         console.log("inputFecha.value:", inputFecha.value);
-        console.log("selectPais.Options.length:", selectPais.Options.length);
-        console.log("selectPais.selectedIndex:", selectPais.selectIndex);
+        console.log("selectPais.options.length:", selectPais.options.length);
+        console.log("selectPais.selectedIndex:", selectPais.selectedIndex);
         console.log("selectPais.value:", selectPais.value);
 
         // Mostrar todas las opciones del select

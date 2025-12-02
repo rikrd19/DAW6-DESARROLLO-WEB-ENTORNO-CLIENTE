@@ -34,13 +34,13 @@
       const resultadoDiv = document.getElementById("resultado-cookies");
 
       // Imprimir por pantalla: Lo que vamos a imprimir
-      resultadoDiv.innerHTML += "<p><strong>Lo que vamos a imprimir:</strong></p>";
+      resultadoDiv.innerHTML += "<p>Lo que vamos a imprimir: </p>";
       resultadoDiv.innerHTML += "<p>1. Todas las cookies creadas</p>";
       resultadoDiv.innerHTML += "<p>2. El array de cookies</p>";
       resultadoDiv.innerHTML += "<p>3. La línea que convierte document.cookie en array</p>";
 
       // Imprimir por pantalla: Resultado - Todas las cookies
-      resultadoDiv.innerHTML += "<p><strong>Resultado:</strong></p>";
+      resultadoDiv.innerHTML += "<p>Resultado: </p>";
       resultadoDiv.innerHTML +=
         "<p><strong>Todas las cookies:</strong> " + document.cookie + "</p>";
       console.log("Todas las cookies: ", document.cookie);
@@ -48,19 +48,19 @@
       // La línea que convierte document.cookie en array
       let arrayCookies = document.cookie.split("; ");
       resultadoDiv.innerHTML +=
-        "<p><strong>Línea que convierte document.cookie en array:</strong></p>";
+        "<p>Línea que convierte document.cookie en array:</p>";
       resultadoDiv.innerHTML +=
         "<p><code>let arrayCookies = document.cookie.split('; ');</code></p>";
       resultadoDiv.innerHTML +=
         "<p>El método <code>split('; ')</code> divide la cadena de cookies en un array donde cada elemento es una cookie individual.</p>";
 
       // Procesar cada cookie individualmente
-      resultadoDiv.innerHTML += "<p><strong>Array de cookies:</strong> " + arrayCookies + "</p>";
-      resultadoDiv.innerHTML += "<p><strong>Cookies individuales:</strong></p>";
+      resultadoDiv.innerHTML += "<p>Array de cookies:" + arrayCookies + "</p>";
+      resultadoDiv.innerHTML += "<p>Cookies individuales:</p>";
       resultadoDiv.innerHTML += "<ul>";
       for (let cookie of arrayCookies) {
         const [nombre, valor] = cookie.split("=");
-        resultadoDiv.innerHTML += `<li><strong>${nombre}</strong> = ${valor}</li>`;
+        resultadoDiv.innerHTML += `<li>${nombre}= ${valor}</li>`;
         console.log("Nombre:", nombre, "Valor:", valor);
       }
       resultadoDiv.innerHTML += "</ul>";

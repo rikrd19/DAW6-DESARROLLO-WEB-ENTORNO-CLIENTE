@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Laboratorio 7</title>
+     <!-- Favicon simple usando un emoji -->
+     <link
+     rel="icon"
+     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>"
+   />
   </head>
   <body>
     <p>================================================================</p>
@@ -21,58 +26,54 @@
     <button onclick="cargarSeleccion()">cargarSeleccion</button>
 
     <script>
-      // 1. obtener elementos
+      // 1. Obtener elementos del DOM
       const radioButton = document.getElementById("acepto_condiciones");
       const cuerpo = document.body;
 
-      // 2. funcion cambiar el color segun seleccion
+      // 2. Función para cambiar el color del fondo según la selección
       function cambiarColor() {
         if (radioButton.checked) {
-          cuerpo.style.backgroundColor = "green"; //fondo verde si acepta
+         
+          cuerpo.style.backgroundColor = "green"; // Si el radio button está marcado (aceptado)
           console.log("Color cambiado a VERDE (aceptado)");
         } else {
-          cuerpo.style.backgroundColor = "red"; // fondo rojo si no acepta
+          cuerpo.style.backgroundColor = "red";  // Si el radio button NO está marcado (no aceptado)
           console.log("Color cambiado a ROJO (no aceptado)");
         }
       }
 
-      // 3. escuchar cambios en el radio button
+      // 3. Escuchar cuando el usuario cambia la selección del radio button
       radioButton.addEventListener("change", function () {
-        cambiarColor();
-        guardarSeleccion(); // guardar automaticamente cuando cambia
+        cambiarColor(); // Cambiar el color inmediatamente
+        guardarSeleccion(); // Guardar el estado en localStorage
       });
 
-      // 4. funcion para guardar en localStorage
+      // 4. Función para guardar el estado en localStorage
       function guardarSeleccion() {
-        // Guardar como string explícitamente para evitar problemas de conversión
-        localStorage.setItem("acepto", radioButton.checked.toString());
-        console.log("Estado guardado en localStorage:", radioButton.checked);
+        localStorage.setItem("acepto", radioButton.checked.toString());// Guardar el valor como string ("true" o "false")
+        console.log("Estado guardado:", radioButton.checked);
       }
 
-      // 5. funcion para cargar desde localStorage
+      // 5. Función para cargar el estado desde localStorage
       function cargarSeleccion() {
-        const aceptoGuardado = localStorage.getItem("acepto"); //obtener el valor guardado
-        console.log("Valor obtenido del localStorage: ", aceptoGuardado);
+        const aceptoGuardado = localStorage.getItem("acepto");    // Obtener el valor guardado anteriormente
+        console.log("Valor obtenido del localStorage:", aceptoGuardado);
 
         if (aceptoGuardado !== null) {
-          // Conversión explícita de string a boolean
-          radioButton.checked = aceptoGuardado === "true";
-          cambiarColor(); // aplicar el color correspondiente
-          console.log(
-            "Estado cargado desde localStorage: ",
-            radioButton.checked
-          );
+          // Si hay un valor guardado, restaurar el estado del radio button
+          radioButton.checked = aceptoGuardado === "true"; // Convertir el string "true" o "false" a boolean
+          cambiarColor(); // Aplicar el color correspondiente
         } else {
-          // Si no hay datos guardados, establecer fondo rojo por defecto
+          // Si NO hay datos guardados, empezar con fondo rojo (no aceptado)
           radioButton.checked = false;
-          cambiarColor();
-          console.log("No hay datos guardados en localStorage. Fondo establecido a Rojo por defecto.");
+          cambiarColor(); // Usar la función cambiarColor para mantener consistencia
+          console.log("No hay datos guardados. Fondo establecido a ROJO por defecto.");
         }
       }
 
-      // 6. Al cargar la página, cargar automaticamente
+      // 6. Cuando la página se carga, restaurar el estado guardado
       window.addEventListener("load", function () {
-        console.log("Pagina cargada - buscando datos guardados...");
+        console.log("Página cargada - restaurando estado guardado...");
         cargarSeleccion();
       });
     </script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio 7</title>
+    <!-- Favicon simple usando un emoji -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>"
+    />
+  </head>
+  <body>
+    <h1>Ejercicio 1</h1>
+
+    <p>================================================================</p>
+    <h3>Ejercicio 1 : Cookies</h3>
+    <p>================================================================</p>
+    <p><strong>1 - creacion de cookies</strong></p>
+    <p><strong>2 - Impresion de cookies </strong></p>
+
+    <div id="resultado-cookies"></div>
+    <script>
+      // Ejercicio 1: Creación de Array a partir de Cookies
+      console.log("========================================");
+      console.log("Ejercicio 1: Creación de Array a partir de Cookies");
+      console.log("========================================");
+
+      // Crear cookies
+      document.cookie = "usuario=ana";
+      document.cookie = "idioma=es";
+      document.cookie = "tema=oscuro";
+
+      const resultadoDiv = document.getElementById("resultado-cookies");
+
+      // Imprimir por pantalla: Lo que vamos a imprimir
+      resultadoDiv.innerHTML += "<p>Lo que vamos a imprimir: </p>";
+      resultadoDiv.innerHTML += "<p>1. Todas las cookies creadas</p>";
+      resultadoDiv.innerHTML += "<p>2. El array de cookies</p>";
+      resultadoDiv.innerHTML += "<p>3. La línea que convierte document.cookie en array</p>";
+
+      // Imprimir por pantalla: Resultado - Todas las cookies
+      resultadoDiv.innerHTML += "<p>Resultado: </p>";
+      resultadoDiv.innerHTML +=
+        "<p><strong>Todas las cookies:</strong> " + document.cookie + "</p>";
+      console.log("Todas las cookies: ", document.cookie);
+
+      // La línea que convierte document.cookie en array
+      let arrayCookies = document.cookie.split("; ");
+      resultadoDiv.innerHTML +=
+        "<p>Línea que convierte document.cookie en array:</p>";
+      resultadoDiv.innerHTML +=
+        "<p><code>let arrayCookies = document.cookie.split('; ');</code></p>";
+      resultadoDiv.innerHTML +=
+        "<p>El método <code>split('; ')</code> divide la cadena de cookies en un array donde cada elemento es una cookie individual.</p>";
+
+      // Procesar cada cookie individualmente
+      resultadoDiv.innerHTML += "<p>Array de cookies:" + arrayCookies + "</p>";
+      resultadoDiv.innerHTML += "<p>Cookies individuales:</p>";
+      resultadoDiv.innerHTML += "<ul>";
+      for (let cookie of arrayCookies) {
+        const [nombre, valor] = cookie.split("=");
+        resultadoDiv.innerHTML += `<li>${nombre}= ${valor}</li>`;
+        console.log("Nombre:", nombre, "Valor:", valor);
+      }
+      resultadoDiv.innerHTML += "</ul>";
+
+      // Mostrar en consola también
+      console.log("Array de cookies: ", arrayCookies);
+    </script>
+
+   
+
+   
+  </body>
+</html>

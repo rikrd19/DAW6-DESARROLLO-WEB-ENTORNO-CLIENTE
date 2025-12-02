@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 7</title>
+</head>
+<body>
+    <h1>Ejercicio 2</h1>
+    
+    <p>================================================================</p>
+    <h3>Ejercicio 2 : Creacion de formulario en pagina Web</h3>
+    <p>================================================================</p>
+    <div><strong>Creacion - Formulario</strong></div>
+
+    <div id="formulario-container"></div>
+    <div id="resultados"></div>
+
+    <script>
+      // Crear elementos del formulario
+      const container = document.getElementById("formulario-container");
+      const resultados = document.getElementById("resultados");
+
+      // Crear formulario
+      const form = document.createElement("form");
+
+      // Campo nombre
+      const labelNombre = document.createElement("label");
+      labelNombre.textContent = "Nombre";
+      const inputNombre = document.createElement("input");
+      inputNombre.type = "text";
+      inputNombre.id = "nombre";
+
+      // Campo fecha
+      const labelFecha = document.createElement("label");
+      labelFecha.textContent = "Fecha de nacimiento: ";
+      const inputFecha = document.createElement("input");
+      inputFecha.type = "date";
+      inputFecha.id = "fechaNacimiento";
+
+      // Select Pais
+      const labelPais = document.createElement("label");
+      labelPais.textContent = "Pais de nacionalidad";
+      const selectPais = document.createElement("select");
+      selectPais.id = "pais";
+
+      //Opciones del select
+      const paises = [
+        { value: "es", text: "Argentina" },
+        { value: "ct", text: "Catalan" },
+        { value: "cl", text: "Colombia" },
+        { value: "br", text: "Brasil" },
+        { value: "us", text: "EE UU" },
+        { value: "es", text: "España" },
+        { value: "ec", text: "Ecuador" },
+        { value: "mx", text: "Mexico" },
+        { value: "pe", text: "Peru" },
+        { value: "pt", text: "Portugal" },
+        { value: "fr", text: "Francia" },
+      ];
+
+      paises.forEach((pais) => {
+        const option = document.createElement("option");
+        option.value = pais.value;
+        option.textContent = pais.value;
+        selectPais.appendChild(option);
+      });
+
+      // Boton
+      const boton = document.createElement("button");
+      boton.type = "button";
+      boton.textContent = "Mostrar Valores";
+
+      // Agregar elementos al formulario
+
+      form.appendChild(labelNombre);
+      form.appendChild(inputNombre);
+      form.appendChild(document.createElement("br"));
+
+      form.appendChild(labelFecha);
+      form.appendChild(inputFecha);
+      form.appendChild(document.createElement("br"));
+
+      form.appendChild(labelPais);
+      form.appendChild(selectPais);
+      form.appendChild(document.createElement("br"));
+
+      form.appendChild(boton);
+
+      // Agregar formulario al contenedor
+      container.appendChild(form);
+
+      // Funcion para mostrar valores
+      boton.addEventListener("click", function () {
+        // Obtener valores
+        const nombre = inputNombre.value;
+        const fecha = inputFecha.value;
+        const paisValor = selectPais.value;
+        const paisTexto = selectPais.options[selectPais.selectedIndex].text;
+
+        // Mostrar en la pagina
+        resultados.innerHTML = `
+          <h3>Valores del fornulario:</h3>
+          <p><strong>Nombre:</strong> ${nombre} </p>
+          <p><strong>Fecha de nacimiento:</strong> ${fecha}</p>
+          <p><strong>Pais (valor):</strong> ${paisValor}</p>
+          <p><strong>Pais (texto):</strong> ${paisTexto}</p>
+          `;
+        // mostrar propiedades clave en consola
+        console.log("=== PROPIEDADES CLAVE ===");
+        console.log("inputNombre.type:", inputNombre.type);
+        console.log("inputNombre.value:", inputNombre.value);
+        console.log("inputFecha.type:", inputFecha.type);
+        console.log("inputFecha.value:", inputFecha.value);
+        console.log("selectPais.Options.length:", selectPais.Options.length);
+        console.log("selectPais.selectedIndex:", selectPais.selectIndex);
+        console.log("selectPais.value:", selectPais.value);
+
+        // Mostrar todas las opciones del select
+        console.log("Opciones del selector:");
+        for (let i = 0; i < selectPais.options.length; i++) {
+          console.log(
+            ` [${i}] value: "${selectPais.options[i].value}", text: "${selectPais.options[i].text}"`
+          );
+        }
+      });
+    </script>
+
+</body>
+</html>

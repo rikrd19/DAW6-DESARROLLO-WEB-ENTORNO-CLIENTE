@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 7</title>
+</head>
+<body>
+    <h1>Ejercicio 3</h1>
+
+    <p>================================================================</p>
+    <h3>Ejercicio 3 : Manipulacion DOM</h3>
+    <p>================================================================</p>
+
+    <!-- creacion de parrafo -->
+    <p id="mensaje">Este es el parrafo original.</p>
+
+    <button onclick="ejecutarEjercicios3()">Ejecutar Ejercicio 3</button>
+    <p>
+      <strong>1 - Crear un nuevo nodo de elemento de lista(li)</strong>
+    </p>
+
+    <script>
+      function ejecutarEjercicios3() {
+        // 1 - Crear un nuevo nodo de elemento de lista(<li>)
+        let nuevoElemento = document.createElement("li");
+
+        // 2 - Asignarle el texto visible "Nuevo Mensaje" a ese nodo
+        nuevoElemento.textContent = "Nuevo Mensaje";
+
+        // 3 - Modificar el contenido HTML interno del parrafo existente
+        let parrafo = document.getElementById("mensaje");
+        parrafo.innerHTML = ""; //limpia el contenido anterior
+        parrafo.appendChild(nuevoElemento);
+
+        //Tambien mostrar en consola
+        console.log("Ejercicio 3 completado: ");
+        console.log("1. Se creo un elemento <li> ");
+        console.log("2. Se le asigno el texto 'Nuevo Mensaje' ");
+        console.log("3. Se modifico el parrafo con id='mensaje' ");
+      }
+    </script>
+</body>
+</html>

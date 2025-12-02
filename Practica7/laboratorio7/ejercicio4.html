@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>================================================================</p>
+    <h3>Ejercicio 4 :Radio button y localStorage</h3>
+    <p>================================================================</p>
+
+    <!-- boton radio -->
+    <input type="radio" name="condiciones" id="acepto_condiciones" />
+    <label for="acepto_condiciones">Acepto las condiciones</label>
+
+    <br /><br />
+
+    <!-- botones para cargar y guardar -->
+    <button onclick="guardarSeleccion()">GuardarSeleccion</button>
+    <button onclick="cargarSeleccion()">cargarSeleccion</button>
+
+    <script>
+      // 1. obtener elementos
+      const radioButton = document.getElementById("acepto_condiciones");
+      const cuerpo = document.body;
+
+      // 2. funcion cambiar el color segun seleccion
+      function cambiarColor() {
+        if (radioButton.checked) {
+          cuerpo.style.backgroundColor = "green"; //fondo verde si acepta
+          console.log("Color cambiado a VERDE (aceptado)");
+        } else {
+          cuerpo.style.backgroundColor = "red"; // fondo rojo si no acepta
+          console.log("Color cambiado a ROJO (no aceptado)");
+        }
+      }
+
+      // 3. escuchar cambios en el radio button
+      radioButton.addEventListener("change", function () {
+        cambiarColor();
+        guardarSeleccion(); // guardar automaticamente cuando cambia
+      });
+
+      // 4. funcion para guardar en localStorage
+      function guardarSeleccion() {
+        // Guardar como string explícitamente para evitar problemas de conversión
+        localStorage.setItem("acepto", radioButton.checked.toString());
+        console.log("Estado guardado en localStorage:", radioButton.checked);
+      }
+
+      // 5. funcion para cargar desde localStorage
+      function cargarSeleccion() {
+        const aceptoGuardado = localStorage.getItem("acepto"); //obtener el valor guardado
+        console.log("Valor obtenido del localStorage: ", aceptoGuardado);
+
+        if (aceptoGuardado !== null) {
+          // Conversión explícita de string a boolean
+          radioButton.checked = aceptoGuardado === "true";
+          cambiarColor(); // aplicar el color correspondiente
+          console.log(
+            "Estado cargado desde localStorage: ",
+            radioButton.checked
+          );
+        } else {
+          // Si no hay datos guardados, establecer fondo rojo por defecto
+          radioButton.checked = false;
+          cambiarColor();
+          console.log("No hay datos guardados en localStorage. Fondo establecido a Rojo por defecto.");
+        }
+      }
+
+      // 6. Al cargar la página, cargar automaticamente
+      window.addEventListener("load", function () {
+        console.log("Pagina cargada - buscando datos guardados...");
+        cargarSeleccion();
+      });
+    </script>
+  </body>
+</html>

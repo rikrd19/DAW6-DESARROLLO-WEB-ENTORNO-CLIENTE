@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio 7</title>
+    <!-- Favicon simple usando un emoji -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>"
+    />
+  </head>
+  <body>
+    <h1>Ejercicio 1</h1>
+
+    <p>================================================================</p>
+    <h3>Ejercicio 1 : Cookies</h3>
+    <p>================================================================</p>
+    <p><strong>1 - creacion de cookies</strong></p>
+    <p><strong>2 - Impresion de cookies </strong></p>
+
+    <div id="resultado-cookies"></div>
+    <script>
+      document.cookie = "usuario=ana";
+      document.cookie = "idioma=es";
+      document.cookie = "tema=oscuro";
+      const resultadoDiv = document.getElementById("resultado-cookies");
+
+      // Mostrar todas las cookies en una línea
+      resultadoDiv.innerHTML =
+        "<p><strong>Mostrando todas las cookies:</strong> " +
+        document.cookie +
+        "</p>";
+      console.log("Todas las cookies: ", document.cookie);
+
+      resultadoDiv.innerHTML +=
+        "<p>Esta linea permite a traves document.cookie devolver una cadena con todas las cookies separadas por '; '.El método split('; ') divide esa cadena en un array de strings, donde cada elemento es una cookie (en formato 'nombre=valor')</p>";
+      let arrayCookies = document.cookie.split("; ");
+      //procesa cada cookie individulamente
+      for (let cookie of arrayCookies) {
+        const [nombre, valor] = cookie.split("=");
+        console.log("Nombre:", nombre, "Valor:", valor);
+      }
+
+      // Mostrar el array de cookies de forma simple
+      resultadoDiv.innerHTML +=
+        "<p><strong>Array de cookies:</strong> " + arrayCookies + "</p>";
+
+      // Además, podemos seguir mostrando en consola si lo deseamos
+      console.log("Array decookies: ", arrayCookies);
+    </script>
+
+    <p>================================================================</p>
+    <h3>Ejercicio 2 : Creacion de formulario en pagina Web</h3>
+    <p>================================================================</p>
+    <div><strong>Creacion - Formulario</strong></div>
+
+    <div id="formulario-container"></div>
+    <div id="resultados"></div>
+
+    <script>
+      // Crear elementos del formulario
+      const container = document.getElementById("formulario-container");
+      const resultados = document.getElementById("resultados");
+
+      // Crear formulario
+      const form = document.createElement("form");
+
+      // Campo nombre
+      const labelNombre = document.createElement("label");
+      labelNombre.textContent = "Nombre";
+      const inputNombre = document.createElement("input");
+      inputNombre.type = "text";
+      inputNombre.id = "nombre";
+
+      // Campo fecha
+      const labelFecha = document.createElement("label");
+      labelFecha.textContent = "Fecha de nacimiento: ";
+      const inputFecha = document.createElement("input");
+      inputFecha.type = "date";
+      inputFecha.id = "fechaNacimiento";
+
+      // Select Pais
+      const labelPais = document.createElement("label");
+      labelPais.textContent = "Pais de nacionalidad";
+      const selectPais = document.createElement("select");
+      selectPais.id = "pais";
+
+      //Opciones del select
+      const paises = [
+        { value: "es", text: "Argentina" },
+        { value: "ct", text: "Catalan" },
+        { value: "cl", text: "Colombia" },
+        { value: "br", text: "Brasil" },
+        { value: "us", text: "EE UU" },
+        { value: "es", text: "España" },
+        { value: "ec", text: "Ecuador" },
+        { value: "mx", text: "Mexico" },
+        { value: "pe", text: "Peru" },
+        { value: "pt", text: "Portugal" },
+        { value: "fr", text: "Francia" },
+      ];
+
+      paises.forEach((pais) => {
+        const option = document.createElement("option");
+        option.value = pais.value;
+        option.textContent = pais.value;
+        selectPais.appendChild(option);
+      });
+
+      // Boton
+      const boton = document.createElement("button");
+      boton.type = "button";
+      boton.textContent = "Mostrar Valores";
+
+      // Agregar elementos al formulario
+
+      form.appendChild(labelNombre);
+      form.appendChild(inputNombre);
+      form.appendChild(document.createElement("br"));
+
+      form.appendChild(labelFecha);
+      form.appendChild(inputFecha);
+      form.appendChild(document.createElement("br"));
+
+      form.appendChild(labelPais);
+      form.appendChild(selectPais);
+      form.appendChild(document.createElement("br"));
+
+      form.appendChild(boton);
+
+      // Agregar formulario al contenedor
+      container.appendChild(form);
+
+      // Funcion para mostrar valores
+      boton.addEventListener("click", function () {
+        // Obtener valores
+        const nombre = inputNombre.value;
+        const fecha = inputFecha.value;
+        const paisValor = selectPais.value;
+        const paisTexto = selectPais.options[selectPais.selectedIndex].text;
+
+        // Mostrar en la pagina
+        resultados.innerHTML = `
+          <h3>Valores del fornulario:</h3>
+          <p><strong>Nombre:</strong> ${nombre} </p>
+          <p><strong>Fecha de nacimiento:</strong> ${fecha}</p>
+          <p><strong>Pais (valor):</strong> ${paisValor}</p>
+          <p><strong>Pais (texto):</strong> ${paisTexto}</p>
+          `;
+        // mostrar propiedades clave en consola
+        console.log("=== PROPIEDADES CLAVE ===");
+        console.log("inputNombre.type:", inputNombre.type);
+        console.log("inputNombre.value:", inputNombre.value);
+        console.log("inputFecha.type:", inputFecha.type);
+        console.log("inputFecha.value:", inputFecha.value);
+        console.log("selectPais.Options.length:", selectPais.Options.length);
+        console.log("selectPais.selectedIndex:", selectPais.selectIndex);
+        console.log("selectPais.value:", selectPais.value);
+
+        // Mostrar todas las opciones del select
+        console.log("Opciones del selector:");
+        for (let i = 0; i < selectPais.options.length; i++) {
+          console.log(
+            ` [${i}] value: "${selectPais.options[i].value}", text: "${selectPais.options[i].text}"`
+          );
+        }
+      });
+    </script>
+
+    <p>================================================================</p>
+    <h3>Ejercicio 3 : Manipulacion DOM</h3>
+    <p>================================================================</p>
+
+    <!-- creacion de parrafo -->
+    <p id="mensaje">Este es el parrafo original.</p>
+
+    <button onclick="ejecutarEjercicios3()">Ejecutar Ejercicio 3</button>
+    <p>
+      <strong>1 - Crear un nuevo nodo de elemento de lista(li)</strong>
+    </p>
+
+    <script>
+      function ejecutarEjercicios3() {
+        // 1 - Crear un nuevo nodo de elemento de lista(<li>)
+        let nuevoElemento = document.createElement("li");
+
+        // 2 - Asignarle el texto visible "Nuevo Mensaje" a ese nodo
+        nuevoElemento.textContent = "Nuevo Mensaje";
+
+        // 3 - Modificar el contenido HTML interno del parrafo existente
+        let parrafo = document.getElementById("mensaje");
+        parrafo.innerHTML = ""; //limpia el contenido anterior
+        parrafo.appendChild(nuevoElemento);
+
+        //Tambien mostrar en consola
+        console.log("Ejercicio 3 completado: ");
+        console.log("1. Se creo un elemento <li> ");
+        console.log("2. Se le asigno el texto 'Nuevo Mensaje' ");
+        console.log("3. Se modifico el parrafo con id='mensaje' ");
+      }
+    </script>
+  </body>
+</html>

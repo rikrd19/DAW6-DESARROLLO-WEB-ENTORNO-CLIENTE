@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 9: Eventos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .box-section {
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 40px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .box-div {
+            background-color: #e8f5e9;
+            border: 2px solid #4caf50;
+            padding: 40px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.1s ease, background-color 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #test-click {
+            background-color: #ffeb3b;
+            border: 2px solid #fbc02d;
+        }
+
+        #test-click:hover {
+            background-color: #fdd835;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilos visuales para ver la propagación (Bubbling) */
+        .box-section:hover {
+            background-color: #bbdefb;
+        }
+
+        .box-div:hover {
+            background-color: #c8e6c9;
+        }
+
+        #btn-bubbling {
+            background-color: #fff;
+            border: 2px solid #ccc;
+        }
+
+        #btn-bubbling:hover {
+            background-color: #f5f5f5;
+            border-color: #999;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Programación de Eventos II</h1>
+
+    <!-- EJERCICIO 1 -->
+    <section>
+        <h2>Ejercicio 1: Orden de Eventos de Ratón</h2>
+        <p>Abre la consola del navegador (F12) y haz clic (o doble clic) en el botón amarillo.</p>
+        <button id="test-click">Prueba de Eventos</button>
+    </section>
+
+    <hr>
+
+    <!-- EJERCICIO 2 y 3 -->
+    <section>
+        <h2>Ejercicio 2 y 3: Bubbling y stopPropagation</h2>
+        <p>Haz clic en los diferentes niveles para ver la propagación.</p>
+
+        <section id="zona-section" class="box-section">
+            <strong>SECTION (Abuelo/Padre)</strong>
+
+            <div id="zona-div" class="box-div">
+                <strong>DIV (Padre/Hijo)</strong>
+                <br><br>
+                <button id="btn-bubbling">BUTTON (Hijo/Nieto)</button>
+            </div>
+
+        </section>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

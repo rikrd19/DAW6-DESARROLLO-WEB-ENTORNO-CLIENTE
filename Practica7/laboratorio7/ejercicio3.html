@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio 7</title>
+    <!-- Favicon simple usando un emoji -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>"
+    />
+  </head>
+  <body>
+    <h1>Ejercicio 3</h1>
+
+    <p>================================================================</p>
+    <h3>Ejercicio 3 : Manipulacion DOM</h3>
+    <p>================================================================</p>
+
+    <!-- creacion de parrafo -->
+    <p id="mensaje">Este es el parrafo original.</p>
+
+    <button onclick="ejecutarEjercicios3()">Ejecutar Ejercicio 3</button>
+    <p>
+      <strong>1 - Crear un nuevo nodo de elemento de lista(li)</strong>
+    </p>
+
+    <div id="resultado-ejercicio3"></div>
+    <script>
+      function ejecutarEjercicios3() {
+        // Ejercicio 3: Manipulación DOM
+        console.log("========================================");
+        console.log("Ejercicio 3: Manipulación DOM");
+        console.log("========================================");
+
+        const resultadoDiv = document.getElementById("resultado-ejercicio3");
+
+        // Imprimir por pantalla: Lo que vamos a hacer
+        resultadoDiv.innerHTML +=
+          "<p><strong>Lo que vamos a hacer:</strong></p>";
+        resultadoDiv.innerHTML +=
+          "<p>1. Crear un nuevo nodo de elemento de lista (&lt;li&gt;)</p>";
+        resultadoDiv.innerHTML +=
+          "<p>2. Asignarle el texto visible 'Nuevo Mensaje' a ese nodo</p>";
+        resultadoDiv.innerHTML +=
+          "<p>3. Modificar el contenido HTML interno del párrafo existente (id='mensaje')</p>";
+
+        // 1 - Crear un nuevo nodo de elemento de lista(<li>)
+        let nuevoElemento = document.createElement("li");
+
+        // 2 - Asignarle el texto visible "Nuevo Mensaje" a ese nodo
+        nuevoElemento.textContent = "Nuevo Mensaje";
+
+        // 3 - Modificar el contenido HTML interno del parrafo existente
+        let parrafo = document.getElementById("mensaje");
+        parrafo.innerHTML = ""; //limpia el contenido anterior
+        parrafo.appendChild(nuevoElemento);
+
+        // Imprimir por pantalla: Resultado
+        resultadoDiv.innerHTML += "<p><strong>Resultado:</strong></p>";
+        resultadoDiv.innerHTML += "<p>✓ Se creó un elemento &lt;li&gt;</p>";
+        resultadoDiv.innerHTML +=
+          "<p>✓ Se le asignó el texto 'Nuevo Mensaje'</p>";
+        resultadoDiv.innerHTML +=
+          "<p>✓ Se modificó el párrafo con id='mensaje' para mostrar el nuevo elemento</p>";
+        resultadoDiv.innerHTML +=
+          "<p><strong>El párrafo ahora contiene:</strong></p>";
+        resultadoDiv.innerHTML += "<p id='mostrar-resultado'></p>";
+
+        // Mostrar el contenido actual del párrafo
+        setTimeout(function () {
+          const mostrarResultado = document.getElementById("mostrar-resultado");
+          mostrarResultado.innerHTML = parrafo.innerHTML;
+        }, 100);
+
+        //Tambien mostrar en consola
+        console.log("Ejercicio 3 completado: ");
+        console.log("1. Se creó un elemento <li>");
+        console.log("2. Se le asignó el texto 'Nuevo Mensaje'");
+        console.log("3. Se modificó el párrafo con id='mensaje'");
+      }
+    </script>
+  </body>
+</html>

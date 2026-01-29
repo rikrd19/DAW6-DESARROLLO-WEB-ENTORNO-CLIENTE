@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Laboratorio 7</title>
-    <!-- Favicon simple usando un emoji -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>"
-    />
+     <!-- Favicon simple usando un emoji -->
+     <link
+     rel="icon"
+     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>"
+   />
   </head>
   <body>
     <p>================================================================</p>
@@ -33,10 +33,11 @@
       // 2. Función para cambiar el color del fondo según la selección
       function cambiarColor() {
         if (radioButton.checked) {
+         
           cuerpo.style.backgroundColor = "green"; // Si el radio button está marcado (aceptado)
           console.log("Color cambiado a VERDE (aceptado)");
         } else {
-          cuerpo.style.backgroundColor = "red"; // Si el radio button NO está marcado (no aceptado)
+          cuerpo.style.backgroundColor = "red";  // Si el radio button NO está marcado (no aceptado)
           console.log("Color cambiado a ROJO (no aceptado)");
         }
       }
@@ -49,13 +50,13 @@
 
       // 4. Función para guardar el estado en localStorage
       function guardarSeleccion() {
-        localStorage.setItem("acepto", radioButton.checked.toString()); // Guardar el valor como string ("true" o "false")
+        localStorage.setItem("acepto", radioButton.checked.toString());// Guardar el valor como string ("true" o "false")
         console.log("Estado guardado:", radioButton.checked);
       }
 
       // 5. Función para cargar el estado desde localStorage
       function cargarSeleccion() {
-        const aceptoGuardado = localStorage.getItem("acepto"); // Obtener el valor guardado anteriormente
+        const aceptoGuardado = localStorage.getItem("acepto");    // Obtener el valor guardado anteriormente
         console.log("Valor obtenido del localStorage:", aceptoGuardado);
 
         if (aceptoGuardado !== null) {
@@ -66,9 +67,7 @@
           // Si NO hay datos guardados, empezar con fondo rojo (no aceptado)
           radioButton.checked = false;
           cambiarColor(); // Usar la función cambiarColor para mantener consistencia
-          console.log(
-            "No hay datos guardados. Fondo establecido a ROJO por defecto."
-          );
+          console.log("No hay datos guardados. Fondo establecido a ROJO por defecto.");
         }
       }
 

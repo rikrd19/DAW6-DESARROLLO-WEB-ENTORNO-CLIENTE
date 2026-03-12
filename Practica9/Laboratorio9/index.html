@@ -1,1 +1,38 @@
-<!-- Practica 9: Eventos realizados en Pagina web DAW-9 -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 9: Programación de Eventos</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        .section { margin-bottom: 30px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9; }
+        textarea { width: 100%; height: 100px; padding: 10px; font-size: 16px; margin-top: 10px; max-width: 500px; }
+        #info-pantalla { margin-top: 15px; font-weight: bold; color: #d32f2f; }
+        button { padding: 10px 15px; font-size: 16px; cursor: pointer; background-color: #1976d2; color: white; border: none; border-radius: 4px; }
+        button:hover { background-color: #1565c0; }
+    </style>
+</head>
+<body id="main-body">
+
+    <h1>Práctica 9: Programación de Eventos</h1>
+
+    <!-- Fase 1: Eventos Básicos -->
+    <div class="section">
+        <h2>Fase 1: Eventos Básicos</h2>
+        <p>Abre la consola para ver cómo se ejecutan múltiples eventos al hacer clic.</p>
+        <button id="btn-multi">Botón con Múltiples Eventos</button>
+    </div>
+
+    <!-- Fase 2: Eventos de Teclado -->
+    <div class="section">
+        <h2>Fase 2: Inspector de Teclado</h2>
+        <p>Pulsa cualquier tecla en cualquier parte para ver la información en la consola y en la pantalla.</p>
+        <textarea id="campo-texto" placeholder="Intenta escribir números aquí (recibirás un error)..."></textarea>
+        <div id="info-pantalla"></div>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

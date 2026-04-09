@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+    <style>
+        /* Estilos base */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        /* Parte 5.1: Clase del modo oscuro */
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* Elementos básicos semánticos */
+        header, main, section {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+        }
+
+        .dark-mode li {
+            background-color: #555;
+            border-color: #777;
+        }
+
+        li button {
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gestor de Tareas</h1>
+        <h2 id="saludo"></h2>
+        
+        <!-- Parte 2.1: Reloj -->
+        <p>Hora actual: <span id="reloj">00:00:00</span></p>
+        
+        <!-- Parte 5.1: Botón modo oscuro -->
+        <button id="toggleModoOscuro">Cambiar Modo Oscuro</button>
+    </header>
+
+    <main>
+        <!-- Parte 2.2: Frases aleatorias -->
+        <section>
+            <h3>Motivación Aleatoria</h3>
+            <button id="botonfrase">Dame una frase</button>
+            <p id="frase"></p>
+        </section>
+
+        <!-- Parte 3: Tareas -->
+        <section>
+            <h3>Mis Tareas</h3>
+            <input type="text" id="inputTarea" placeholder="Introduce una tarea">
+            <button id="botonAdd">Añadir Tarea</button>
+            <ul id="listaTareas"></ul>
+        </section>
+        
+        <!-- Parte 5.2: Monitor de ventana -->
+        <section>
+            <h3>Monitor de Ventana</h3>
+            <p>Ancho: <span id="ancho"></span>px | Alto: <span id="alto"></span>px</p>
+        </section>
+    </main>
+
+    <script>
+        // ==========================================
+        // Parte 1: Gestión de Identidad y Persistencia
+        // ==========================================
+        let nombreStorage = localStorage.getItem('nombreUsuario');
+        
+        if (nombreStorage === null) {
+            let nombreValido = false;
+            
+            do {
+                let nombrePrompt = prompt('¿Cómo te llamas?');
+                
+                // Expresión regular para buscar números (Parte 1.2)
+                const regex = /\d/;
+                
+                if (regex.test(nombrePrompt)) {
+                    alert('El nombre no puede contener números.');
+                } else if (nombrePrompt === null || nombrePrompt.trim() === "") {
+                    // Validacion por si cancela o deja vacío
+                    alert('Debes escribir un nombre válido.');
+                } else {
+                    nombreValido = true;
+                    // Guardar en localStorage (Parte 1.3)
+                    localStorage.setItem('nombreUsuario', nombrePrompt);
+                    nombreStorage = nombrePrompt;
+                }
+            } while (nombreValido === false);
+        }
+        
+        // Poner el saludo al cargar
+        document.getElementById('saludo').textContent = 'Bienvenido, ' + nombreStorage;
+
+        // ==========================================
+        // Parte 2.1: Reloj digital
+        // ==========================================
+        setInterval(function() {
+            let fechaHora = new Date();
+            let horas = String(fechaHora.getHours()).padStart(2, '0');
+            let minutos = String(fechaHora.getMinutes()).padStart(2, '0');
+            let segundos = String(fechaHora.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('reloj').textContent = horas + ':' + minutos + ':' + segundos;
+        }, 1000);
+
+        // ==========================================
+        // Parte 2.2: Generador de mensajes aleatorios
+        // ==========================================
+        const matrizFrases = [
+            ['Motivación', '¡Cada día es una nueva oportunidad!'],
+            ['Humor', 'El código funciona, pero no sé por qué.'],
+            ['Consejo', 'Usa siempre addEventListener'],
+            ['Ánimo', 'Ya casi terminamos el curso']
+        ];
+
+        document.getElementById("botonfrase").addEventListener('click', function() {
+            // Generar indice aleatorio
+            let indiceAleatorio = Math.floor(Math.random() * matrizFrases.length);
+            
+            let categoria = matrizFrases[indiceAleatorio][0];
+            let texto = matrizFrases[indiceAleatorio][1];
+            
+            // Mostrar en pantalla
+            document.getElementById("frase").textContent = categoria + ': ' + texto;
+        });
+
+        // ==========================================
+        // Parte 3 y 4: Gestión de tareas (DOM y Bubbling)
+        // ==========================================
+        let botonAñadir = document.getElementById('botonAdd');
+        let inputTareas = document.getElementById('inputTarea');
+        let listaDOM = document.getElementById('listaTareas');
+
+        function crearTarea() {
+            let valorInput = inputTareas.value;
+
+            // Parte 3.1: Creación dinámica de nodos con createElement
+            let nuevoLi = document.createElement('li');
+            nuevoLi.textContent = valorInput;
+            
+            let botonBorrar = document.createElement('button');
+            botonBorrar.textContent = 'Eliminar';
+            
+            // Insertar el elemento button en el li
+            nuevoLi.appendChild(botonBorrar);
+            
+            // Insertar el li en el ul
+            listaDOM.appendChild(nuevoLi);
+
+            // Parte 3.2: Listener del li (comprobacion de la propagación)
+            nuevoLi.addEventListener('click', function() {
+                console.log('Se hizo clic en la tarea: ' + valorInput);
+            });
+
+            // Parte 3.2: Listener del boton eliminar (y detener propagación)
+            botonBorrar.addEventListener('click', function(e) {
+                e.stopPropagation();
+                nuevoLi.remove();
+            });
+
+            // Limpiar input (Parte 4.2)
+            inputTareas.value = '';
+        }
+
+        // Parte 4.1: addEventListener obligatorio
+        botonAñadir.addEventListener('click', function() {
+            if (inputTareas.value.trim() !== '') {
+                crearTarea();
+            }
+        });
+
+        // Parte 4.2: Evento teclado Enter
+        inputTareas.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                if (inputTareas.value.trim() !== '') {
+                    crearTarea();
+                }
+            }
+        });
+
+        // ==========================================
+        // Parte 5.1: Configuración visual (Modo Oscuro)
+        // ==========================================
+        let botonOscuro = document.getElementById('toggleModoOscuro');
+        
+        // Comprobar estado en localStorage
+        if (localStorage.getItem('temaOscuro') === 'activado') {
+            document.body.classList.add('dark-mode');
+        }
+
+        botonOscuro.addEventListener('click', function() {
+            // classList.toggle devuelve true si añade la clase, false si la quita
+            let tieneLaClase = document.body.classList.toggle('dark-mode');
+            
+            // Persistencia del estado
+            if (tieneLaClase === true) {
+                localStorage.setItem('temaOscuro', 'activado');
+            } else {
+                localStorage.setItem('temaOscuro', 'desactivado');
+            }
+        });
+
+        // ==========================================
+        // Parte 5.2: Monitorización de la ventana
+        // ==========================================
+        let spanAncho = document.getElementById('ancho');
+        let spanAlto = document.getElementById('alto');
+
+        function actualizarMedidas() {
+            spanAncho.textContent = window.innerWidth;
+            spanAlto.textContent = window.innerHeight;
+        }
+
+        // Lo ejecutamos la primera vez
+        actualizarMedidas();
+
+        // Escuchamos el evento resize de la ventana
+        window.addEventListener('resize', actualizarMedidas);
+
+    </script>
+</body>
+</html>

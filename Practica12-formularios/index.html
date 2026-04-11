@@ -3,25 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Practice 12 — Registration form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Formularios</h1>
-    <form action="">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email">
-        <label for="edad">Edad</label>
-        <input type="number" id="edad" name="edad">
-        <label for="fecha">Fecha</label>
-        <input type="date" id="fecha" name="fecha">
-        <label for="color">Color</label>
-        <input type="color" id="color" name="color">
-        <label for="checkbox">Checkbox</label>
-        <input type="checkbox" id="checkbox" name="checkbox">
-        <button type="submit">Enviar</button>
-    </form>
+    <main class="page">
+        <h1>Registration</h1>
+        <p class="intro">Sign up and tell us a bit about your interests.</p>
+
+        <form id="registration-form" action="procesar.php" method="post">
+            <fieldset class="form-section">
+                <legend>Personal details</legend>
+
+                <label for="full-name">Full name</label>
+                <input
+                    type="text"
+                    id="full-name"
+                    name="full_name"
+                    placeholder="e.g. Amanda Dias"
+                    required
+                    minlength="2"
+                    maxlength="80"
+                    pattern="[A-Za-zÀ-ÖØ-öø-ÿñÑ][A-Za-zÀ-ÖØ-öø-ÿñÑ\s'.-]*"
+                    title="Use letters only (accents allowed), with optional spaces, hyphens or apostrophes."
+                    autocomplete="name"
+                >
+
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                    autocomplete="email"
+                >
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="At least 8 characters"
+                    autocomplete="new-password"
+                >
+            </fieldset>
+
+            <div class="form-block">
+                <label for="favorite-language">Favorite language</label>
+                <select id="favorite-language" name="favorite_language">
+                    <option value="html">HTML</option>
+                    <option value="js">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="c++">C++</option>
+                    <option value="c#">C#</option>
+                    <option value="php">PHP</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="swift">Swift</option>
+                    <option value="kotlin">Kotlin</option>
+                    <option value="dart">Dart</option>
+                </select>
+
+                <label for="motivation">Why do you want to join?</label>
+                <textarea
+                    id="motivation"
+                    name="motivation"
+                    rows="5"
+                    cols="40"
+                    maxlength="500"
+                    placeholder="Share your motivation in a few sentences…"
+                ></textarea>
+                <p class="hint">Up to 500 characters.</p>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn--primary">Submit</button>
+            </div>
+        </form>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
